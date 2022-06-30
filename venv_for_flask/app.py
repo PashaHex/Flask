@@ -6,7 +6,7 @@ def make_donate():
     return """
     <html>
        <body>
-         <form action='/git ' method='post'>
+         <form action='/' method='post'>
            <label> Пожертвование </label> 
            <input> 
            </br>
@@ -24,12 +24,18 @@ def request_donate():
     return """
     <html>
        <body>
-         <form action='/request/donate' method='post'>           
+         <form action='/' method='post'>           
            <label> Регистрация Прошения </label>            
            </br>
-           <button type='submit'> 
-           
+           <button type='submit'>            
            Просить
+           </button>
+         </form>
+         <form action='/request/donate' method='post'>           
+           <label> Регистрация Пожертвования </label>            
+           </br>
+           <button type='submit'>            
+           Пожертвовать
            </button>
          </form>
        </body>
