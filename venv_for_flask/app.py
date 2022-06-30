@@ -1,7 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/request/donate', methods=['GET'])
+@app.route('/request/donate', methods=['POST'])
 def make_donate():
     return """
     <html>
@@ -24,11 +24,12 @@ def request_donate():
     return """
     <html>
        <body>
-         <form action='.' method='post'>           
+         <form action='/request/donate' method='post'>           
            <label> Регистрация Прошения </label>            
            </br>
            <button type='submit'> 
-           <a href='/request/donate'> Просить </a>
+           
+           Просить
            </button>
          </form>
        </body>
