@@ -1,16 +1,10 @@
 from django.db import models
-#
-# # Create your models here.
-# import json
-# from pathlib import Path
-# from flask import Flask, request, render_template
-# from jinja2 import Template
-# import os
-# template_dir = os.path.abspath('templates')
-# app = Flask(__name__)
-#
+
+
 class Request_donate(models.Model):
-    pass
+    # pass
+    ask = models.CharField(max_length=50)
+    make_donate = models.IntegerField()
 # @app.route('/', methods=['GET'])
 # def request_donate():
 #     return render_template('donate.html')
