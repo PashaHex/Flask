@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shotcuts import redirect
+from django.shortcuts import redirect
 
 import donations.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('donate/', include('donate.urls', namespace='donations'),
-    path('', lambda request: redirect('/donate'))
+    path('donate/', include('donations.urls', namespace='donations')),
+    path('', lambda request: redirect('/donate')),
     # path('', donations.views.main_donate_page),
 ]
