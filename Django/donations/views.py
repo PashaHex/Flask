@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
 
+
 def main_donate_page(request):
     context = {
         'make_donate_url': reverse('donations:make_donate'),
@@ -12,15 +13,16 @@ def main_donate_page(request):
     }
     return render(request, 'donate.html', context)
 
+
 def make_donate(request):
     with open('data.json', 'r') as f:
         data = f.read()
         if data:
             cont = json.load(data)
         else:
-            cont=[]
+            cont = []
 
-    row_dict = {'name': request.POST['donation_item'], 'amount': request.POST['donation_amount']}
+    row_dict = {'name': {request.POST['donation_item']}, 'amount': {request.POST['donation_amount']}}
     cont.append(row_dict)
 
     with open('data.json', 'w') as f:
@@ -28,13 +30,25 @@ def make_donate(request):
 
     return render(request, 'thank_for_donate.html')
 
+
 def ask_donate(request):
+    # item = None
+    # with open('data.json', 'r') as f:
+    #     cont = json.load(f)
+    #
+    # if cont:
+    #     item = cont.pop()
+    #
+    #     with open('data.json', 'w') as f:
+    #         json.dump(cont, f)
+    #
+    # return render(request, 'empty_cont.html', {'item': item})
+
     context = {
         'main_url': reverse('donations:main')
     }
 
     with open('data.json', 'r') as f:
-        # cont = json.load(f)
         data = f.read()
         if data:
             cont = json.load(data)
