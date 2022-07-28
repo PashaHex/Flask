@@ -21,7 +21,7 @@ import donations.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('donate/', include('donations.urls', namespace='donations')),
+    path('donate/', include('donations.urls', namespace='main')),
     path('', lambda request: redirect('/donate')),
     # path('', donations.views.main_donate_page),
 ]
