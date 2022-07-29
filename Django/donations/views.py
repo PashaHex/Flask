@@ -15,6 +15,10 @@ def main_donate_page(request):
 
 
 def make_donate(request):
+    context = {
+        'main_url': reverse('donations:main'),
+        'make_donate_url': reverse('donations:make_donate')
+    }
     with open('data.json', 'r') as f:
         data = f.read()
         if data:
@@ -28,7 +32,7 @@ def make_donate(request):
     with open('data.json', 'w') as f:
         json.dump(cont, f)
 
-    return render(request, 'thank_for_donate.html')
+    return render(request, 'make_donate.html', context)
 
 
 def ask_donate(request):
