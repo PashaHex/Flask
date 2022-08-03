@@ -40,8 +40,8 @@ def list(request):
 def ask_donate(request):
     # context = {
     #     'main_url': reverse('donations:main'),
-    #     'empty_cont_url': reverse('donations:empty_cont'),
-    #     'full_url': reverse('donations:full_cont')
+        # 'empty_cont_url': reverse('donations:empty_cont'),
+        # 'full_url': reverse('donations:full_cont')
     # }
     item = None
     with open('data.json', 'r') as file:
@@ -52,7 +52,7 @@ def ask_donate(request):
 
         with open('data.json', 'w') as file:
             json.dump(cont, file)
-    return render(request, 'ask_complete.html', {'item': item})
+    return render(request, 'ask_complete.html',  {'item': item, 'main_url': reverse('donations:main')})
 
 
 def thank_for_donate(request):
