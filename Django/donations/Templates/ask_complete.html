@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div class="container card">
+     {% if item %}
+
+       <h5> Вот, возьмите пожалуйста:</h5>
+       {{ item.name }} ({{ item.amount }} шт)
+       {% include 'link_for_main_page.html' %}
+
+     {% else %}
+
+       <h5 class="card-title"> У нас ничего нет для вас, заходите позже </h5>
+       {% include 'link_for_main_page.html' %}
+
+     {% endif %}
+ </div>
+
+{% endblock %}
