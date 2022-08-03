@@ -1,4 +1,5 @@
 import json
+from typing import Dict, Any
 
 from django.shortcuts import render
 from django.urls import reverse
@@ -9,7 +10,7 @@ def main_donate_page(request):
     context = {
         'make_donate_url': reverse('donations:make_donate'),
         'ask_donate_url': reverse('donations:ask_donate'),
-        'main_url': reverse('donations:main')
+        # 'main_url': reverse('donations:main')
     }
     return render(request, 'donate.html', context)
 
@@ -17,53 +18,85 @@ def main_donate_page(request):
 def make_donate(request):
     context = {
         'main_url': reverse('donations:main'),
-        'make_donate_url': reverse('donations:make_donate')
+        'thank_for_donate_url': reverse('donations:thank_for_donate')
     }
     with open('data.json', 'r') as f:
-        data = f.read()
-        if data:
-            cont = json.load(data)
-        else:
-            cont = []
+        cont = json.load(f)
 
-    row_dict = {'name': {request.POST['donation_item']}, 'amount': {request.POST['donation_amount']}}
-    cont.append(row_dict)
-
+    item = cont.append(
+        {'name': request.POST['donation_item'], 'amount': request.POST['donation_amount']}
+    )
     with open('data.json', 'w') as f:
         json.dump(cont, f)
+    return render(request, 'thank_for_donate.html', context)
 
-    return render(request, 'make_donate.html', context)
 
+def list(request):
+    # context{}
+    with open ('data.json', 'r') as f:
+        context['f'] = json.load(f)
+    return render(request, 'list.html')
 
 def ask_donate(request):
-    # item = None
-    # with open('data.json', 'r') as f:
-    #     cont = json.load(f)
-    #
-    # if cont:
-    #     item = cont.pop()
-    #
-    #     with open('data.json', 'w') as f:
-    #         json.dump(cont, f)
-    #
-    # return render(request, 'empty_cont.html', {'item': item})
-
     context = {
-        'main_url': reverse('donations:main')
+        'main_url': reverse('donations:main'),
+        'empty_cont_url': reverse('donations:empty_cont'),
+        'full_url': reverse('donations:full_cont')
     }
-
+    # item = None
     with open('data.json', 'r') as f:
-        data = f.read()
-        if data:
-            cont = json.load(data)
-        else:
-            cont = []
+        cont = json.load(f)
 
-    if not cont:
-        return render(request, 'empty_cont.html', context)
+    if not cont or request.method != 'POST':
+        return render(request, 'empty_cont.html', context)  # , {'item': item})
+        # return HttpResponse(  f'''
+        #         <html>
+        #           <body>
+        #             <h3> Ничего нет для вас </h3>
+        #             <a href='/'> Back to main </a>
+        #           </body>
+        #         </html>
+        #         '''        )
 
     item = cont.pop()
     with open('data.json', 'w') as f:
         json.dump(cont, f)
+    return render(request, 'full_cont.html', context) #, item=item)
+    # return HttpResponse(        f'''
+    #     <html>
+    #       <body>
+    #         <h3> Вот вам, возьмите </h3>
+    #         {item['name']} {item['amount']}
+    #         <a href='/'> Back to main </a>
+    #       </body>
+    #     </html>
+    #     '''    )
 
-    return render(request, 'full_cont.html', item=item)
+    # if cont:
+    #     item = cont.pop()
+    #     with open('data.json', 'w') as f:
+    #         json.dump(cont, f)
+    # return render(request, 'empty_cont.html') #, {'item': item})
+
+    # with open('data.json', 'r') as f:
+    #     data = f.read()
+    #     if data:
+    #         cont = json.load(data)
+    #     else:
+    #         cont = []
+    #
+    # if not cont:
+    #     return render(request, 'empty_cont.html', context)
+    #
+    # item = cont.pop()
+    # with open('data.json', 'w') as f:
+    #     json.dump(cont, f)
+    #
+    # return render(request, 'full_cont.html', item=item)
+
+def thank_for_donate(request):
+    context = {
+        'main_url': reverse('donations:main'),
+        'thank_for_donate_url': reverse('donations:thank_for_donate')
+    }
+    return render(request, 'thank_for_donate.html', context)
