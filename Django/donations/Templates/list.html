@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if file %}
+    <table class="table table-striped">
+
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">State</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {%  for el in file %}
+                <tr>
+                  <td>{{ el.name }}</td>
+                  <td>{{ el.amount }}</td>
+                  <td>{{ el.state }}</td>
+                </tr>
+            {% endfor  %}
+          </tbody>
+        </table>
+    {% else %}
+      <h5> Склад пуст </h5>
+    {% endif %}
+
+{% endblock %}

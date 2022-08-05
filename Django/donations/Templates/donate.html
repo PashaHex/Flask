@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="col-sm-6" >
+      <div class="card">
+        <div class="card-body">
+          <form action='{{ask_donate_url}}' method='post'>
+            <h5 class="card-title">Регистрация Прошения</h5>
+
+             <button type='submit' class="btn btn-primary">
+                Просить
+             </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <form action='{{make_donate_url}}' method='post'>
+            <h5 class="card-title">Регистрация Пожертвования</h5>
+
+              <div class="mb-3">
+                <label for="donation_item" class="form-label">Name</label>
+                <input class="form-control" id="donation_item" name="donation_item">
+                <div id="emailHelp" class="form-text">Enter thing's name</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="donation_amount" class="form-label">Amount</label>
+                <input class="form-control" id="donation_amount" name="donation_amount">
+                <div id="emailHelp" class="form-text">Enter amount of things</div>
+              </div>
+
+              <button type='submit' class="btn btn-primary">
+                 Пожертвовать
+              </button>
+            </form>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+

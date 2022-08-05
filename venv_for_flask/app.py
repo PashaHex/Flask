@@ -37,15 +37,7 @@ def ask_donate():
         json.dump(cont, f)
 
     return render_template('full_cont.html', item=item)
-    # return f'{item["name"], item["amount"]}' """
-    #     <html>
-    #       <body>
-    #         <form action='/' method='post'>
-    #           <a href='/'> Вернуться на главную страницу </a>
-    #         </form>
-    #       </body>
-    #     </html>
-    #     """
+
 
 if __name__ == '__main__':
     app.run(debug=True)
