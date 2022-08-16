@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if office_file %}
+    <table class="table table-striped">
+
+          <thead>
+            <tr>
+              <th scope="col">Address</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Occupied</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {%  for el in office_file %}
+                <tr>
+                  <td>{{ el.address }}</td>
+                  <td>{{ el.capacity }}</td>
+                  <td>{{ el.occupied }}</td>
+                </tr>
+            {% endfor  %}
+          </tbody>
+        </table>
+    {% else %}
+      <h5> У вас нет созданных офисов </h5>
+    {% endif %}
+
+{% endblock %}

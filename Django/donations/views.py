@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
 
-from donations.models import Request_donate
+from donations.models import Request_donate, Office
 
 
 def main_donate_page(request):
@@ -44,6 +44,10 @@ def list(request):
     # with open('data.json', 'r') as file:
     #     context['file'] = json.load(file)
     # return render(request, 'list.html', context)
+
+def office(request):
+    context = {'office_file': Office.objects.all()}
+    return render(request, 'office.html', context)
 
 def ask_donate(request):
     item = Request_donate.objects.order_by('id').filter(state=False).first()

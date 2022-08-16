@@ -9,5 +9,6 @@ urlpatterns = [
     path('make_donate', views.make_donate, name='make_donate'),
     path('ask_donate', views.ask_donate, name='ask_donate'),
     path('list', views.list, name='list'),
+    path('office', views.office, name='office'),
     path('thank_for_donate', views.thank_for_donate, name='thank_for_donate'),
 ]
